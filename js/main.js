@@ -1,11 +1,18 @@
 
 
-fetch('https://github.com/oluwamayowa17/Interactive-product-list-with-shopping-cart/blob/main/data.json')
-.then((res)=>{return res.json()})
-.then((data)=>{
-    displayProducts(data.product)
-    
-})
+fetch('https://cors-anywhere.herokuapp.com/https://raw.githubusercontent.com/oluwamayowa17/Interactive-product-list-with-shopping-cart/main/data.json')
+    .then(response => {
+        if (!response.ok) {
+            throw new Error('Network response was not ok ' + response.statusText);
+        }
+        return response.json();
+    })
+    .then(data => {
+        displayProducts(data.product);
+    })
+    .catch(error => {
+        console.error('Fetch error:', error);
+    });
 
 let cart = []
 let displayedItemIds = new Set();
