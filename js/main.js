@@ -1,6 +1,6 @@
 
 
-fetch('http://localhost:3000/data.json')
+fetch('https://github.com/oluwamayowa17/Interactive-product-list-with-shopping-cart/blob/main/data.json')
 .then((res)=>{return res.json()})
 .then((data)=>{
     displayProducts(data.product)
