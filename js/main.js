@@ -1,17 +1,18 @@
 
 fetch('https://raw.githubusercontent.com/oluwamayowa17/Interactive-product-list-with-shopping-cart/main/data.json')
-    .then(response => {
-        if (!response.ok) {
-            throw new Error('Network response was not ok ' + response.statusText);
-        }
-        return response.json();
-    })
-    .then(data => {
-        displayProducts(data.product);
-    })
-    .catch(error => {
-        console.error('Fetch error:', error);
-    });
+.then(response => {
+    if (!response.ok) {
+        throw new Error('Network response was not ok ' + response.statusText);
+    }
+    return response.json();
+})
+.then(data => {
+    displayProducts(data.product);
+})
+.catch(error => {
+    console.error('Fetch error:', error);
+});
+
 let cart = []
 let displayedItemIds = new Set();
 
@@ -175,6 +176,29 @@ function displayCartItem(product){
     
 }
 
+function makePayment(email){
+    const products = getItemFromLocalStorage()
+    const totalAmount = products.reduce((total, product) => total + (product.price * product.quantity), 0)
+
+    const popup = new PaystackPop()
+    let obj = {
+        key: API_KEY,
+        email: email,
+        amount: totalAmount * 100 * 1600,
+        ref: '' + Math.floor(Math.random() * 1000000000),
+        onSuccess: function(){
+            displayCheckout();
+        },
+        onClose: function(){
+            alert('Payment cancelled')
+        },
+        
+    }
+    popup.checkout(obj)
+
+}
+
+
 function removeItem(name) {
     const products = getItemFromLocalStorage();
     
@@ -188,6 +212,8 @@ function removeItem(name) {
     }
     
     if (updatedProducts.length === 0) {
+        const emptyProduct = document.querySelector('#empty-cart')
+        emptyProduct.style.display = 'block'
         startOrder()
 
     }
@@ -236,6 +262,7 @@ function displayItemsTotal(){
 }
 
 function displayCheckout(){
+    $('#checkout-page').modal('show')
     const products = getItemFromLocalStorage()
     const productDisplay = document.querySelector('.checkout-item')
     products.forEach(product=>{
@@ -258,4 +285,17 @@ function displayCheckout(){
     orderTotal.textContent = `$${products.reduce((total, product) => total + (product.price * product.quantity), 0).toFixed(2)}`
 }
 
+const checkoutForm = document.querySelector('#checkout-form')
+checkoutForm.addEventListener('submit', handleCheckoutSubmit)
 
+
+function handleCheckoutSubmit(event){
+    event.preventDefault()
+    const email = document.querySelector('#email')
+    if(email.value.length === 0){
+        email.style.border = '1px solid rgba(238, 40, 40, 0.733)';
+        email.style.boxShadow = '1px 2px 2px rgba(248, 133, 133, 0.637)'
+    }else{
+        makePayment(email.value)
+    }
+}

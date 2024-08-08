@@ -15,11 +15,13 @@
         href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400..900&family=Mulish:ital,wght@0,200..1000;1,200..1000&family=Red+Hat+Text:ital,wght@0,300..700;1,300..700&display=swap"
         rel="stylesheet">
 
+        <script src="https://js.paystack.co/v2/inline.js"></script>
+
 </head>
 
 <body>
     <section class="mt-5">
-
+   
         <div class="container">
             <div class="row">
                 <div class="col-md-8">
@@ -60,23 +62,26 @@
                             <p>Your added item will appear here</p>
                         </div>
                     </div>
-                    <div class="row" id="product-cart" style="display: none;">
-                        
-                    </div>
-                    <div class="row" id="cart-total">
+                    <div id="prod">
 
-                    </div>
-                    <div class="row" id="checkout" style="display: none;">
-                        <div class="col-12">
-
-                            <div class="row justify-content-center">
-                                <div class="col-11 p-2 text-muted message">
-                                    <p>This is <strong>carbon-neutral</strong> delivery</p>
+                        <div class="row" id="product-cart" style="display: none;">
+                            
+                        </div>
+                        <div class="row" id="cart-total">
+    
+                        </div>
+                        <div class="row" id="checkout" style="display: none;">
+                            <div class="col-12">
+    
+                                <div class="row justify-content-center">
+                                    <div class="col-11 p-2 text-muted message">
+                                        <p>This is <strong>carbon-neutral</strong> delivery</p>
+                                    </div>
                                 </div>
                             </div>
-                        </div>
-                        <div class="col-12">
-                            <button class="btn mt-4 mb-3" onclick="displayCheckout()" data-toggle="modal" data-target="#checkout-page">Confirm Order</button>
+                            <div class="col-12">
+                                <button class="btn mt-4 mb-3" data-toggle="modal" data-target="#clear-cart">Confirm Order</button>
+                            </div>
                         </div>
                     </div>
                 </div>
@@ -85,6 +90,64 @@
 
         </div>
         
+        <div id="clear-cart" class="modal fade" role="dialog">
+            <div class="modal-dialog">
+
+
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <svg width="48" height="48" viewBox="0 0 48 48" fill="none" xmlns="http://www.w3.org/2000/svg">
+                            <path d="M21 32.121L13.5 24.6195L15.6195 22.5L21 27.879L32.3775 16.5L34.5 18.6225L21 32.121Z" fill="#1EA575"/>
+                            <path d="M24 3C19.8466 3 15.7865 4.23163 12.333 6.53914C8.8796 8.84665 6.18798 12.1264 4.59854 15.9636C3.0091 19.8009 2.59323 24.0233 3.40352 28.0969C4.21381 32.1705 6.21386 35.9123 9.15077 38.8492C12.0877 41.7861 15.8295 43.7862 19.9031 44.5965C23.9767 45.4068 28.1991 44.9909 32.0364 43.4015C35.8736 41.812 39.1534 39.1204 41.4609 35.667C43.7684 32.2135 45 28.1534 45 24C45 18.4305 42.7875 13.089 38.8493 9.15076C34.911 5.21249 29.5696 3 24 3ZM24 42C20.4399 42 16.9598 40.9443 13.9997 38.9665C11.0397 36.9886 8.73256 34.1774 7.37018 30.8883C6.0078 27.5992 5.65134 23.98 6.34587 20.4884C7.04041 16.9967 8.75474 13.7894 11.2721 11.2721C13.7894 8.75473 16.9967 7.0404 20.4884 6.34587C23.98 5.65133 27.5992 6.00779 30.8883 7.37017C34.1774 8.73255 36.9886 11.0397 38.9665 13.9997C40.9443 16.9598 42 20.4399 42 24C42 28.7739 40.1036 33.3523 36.7279 36.7279C33.3523 40.1036 28.7739 42 24 42Z" fill="#1EA575"/>
+                            </svg>   
+                    </div>
+                    <div class="modal-title">
+                        <h2>Checkout Cart</h2>
+                        <p>Fill details Below</p>
+                    </div>
+                    <div class="modal-body">
+                        <form id="checkout-form">
+                            <div class="row mb-2">
+                                <div class="col-sm-12">
+                                <input type="text" placeholder="Full Name" class="form-control" id="name">
+                                </div>
+                            </div>
+                            <div class="row mb-2">
+                                <div class="col-sm-12">
+                                <input type="email" placeholder="Email" class="form-control" id="email">
+                                </div>
+                            </div>
+                                
+                            <div class="row g-3 mt-2">
+                                <div class="col-sm-7">
+                                    <input type="text" class="form-control" placeholder="City" aria-label="City">
+                                </div>
+                                <div class="col-sm">
+                                    <input type="text" class="form-control" placeholder="State" aria-label="State">
+                                </div>
+                                <div class="col-sm">
+                                    <input type="text" class="form-control" placeholder="Zip" aria-label="Zip">
+                                </div>
+                            </div>
+                            <button class="btn mt-4 mb-3">Start New Order</button>
+                        
+                        </form>
+<!--                       
+                        <div class="row py-3 px-2">
+                            <div class="col-9">
+                                <p>Order Total</p>
+                            </div>
+                            <div class="col-3">
+                                <h4 id="order-total"></h4>
+                            </div>
+
+                        </div>  -->
+                     
+                    </div>
+                </div>
+            </div>
+
+        </div>
         <div id="checkout-page" class="modal fade" role="dialog">
             <div class="modal-dialog">
 
@@ -124,6 +187,7 @@
     </section>
 
     <script src="js/main.js"></script>
+    <script src="js/config.js"></script>
     <script src="js/popper.min.js"></script>
     <script src="js/jquery-3.3.1.slim.min.js"></script>
     <script src="js/bootstrap.min.js"></script>

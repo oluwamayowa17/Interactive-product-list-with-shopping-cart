@@ -137,6 +137,18 @@ body{
     width: 100%;
 }
 
+#clear-cart .modal-title{
+    margin-left: 10px;
+}
+
+#clear-cart button{
+    background-color: rgb(218, 84, 7);
+    color: #fff;
+    padding: 15px 25px;
+    border-radius: 25px;
+    width: 100%;
+}
+
 @media (max-width: 575.5px){
     .product-image .add-cart{
         background-color: #ffffff;
